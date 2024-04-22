@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Especie {
+  id   String @id @default(cuid())
+  nome String
+  slug String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  animal Animal[]
+
+  @@index(fields: [nome])
+}
+
+model Animal {
+  id        String  @id @default(cuid())
+  nome      String
+  slug      String
+  especie   Especie @relation(fields: [especieId], references: [id], onUpdate: Cascade)
+  especieId String
+  sexo      Sexo
+  peso      Float
+  foto      String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  consulta     Consulta[]
+  vacina       Vacina[]
+  procedimento Procedimento[]
+
+  @@index(fields: [nome])
+  @@index(fields: [sexo])
+}
+
+model Consulta {
+  id        String   @id @default(cuid())
+  data      DateTime
+  hora      DateTime
+  titulo    String
+  slug      String
+  descricao String
+
+  animal   Animal @relation(fields: [animalId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  animalId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index(fields: [data])
+  @@index(fields: [titulo])
+}
+
+model Vacina {
+  id        String   @id @default(cuid())
+  nome      String
+  slug      String
+  descricao String
+  data      DateTime
+
+  animal   Animal @relation(fields: [animalId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  animalId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index(fields: [data])
+  @@index(fields: [nome])
+}
+
+model Procedimento {
+  id        String   @id @default(cuid())
+  data      DateTime
+  titulo    String
+  slug      String
+  descricao String
+
+  animal   Animal @relation(fields: [animalId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  animalId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index(fields: [data])
+  @@index(fields: [titulo])
+}
+
+enum Sexo {
+  MACHO
+  FEMEA
+}

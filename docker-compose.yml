@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:${DB_VERSION}
+    container_name: db
+    ports:
+      - "5432:5432"
+    shm_size: 8gb
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data: {}
