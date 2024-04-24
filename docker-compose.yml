@@ -4,7 +4,7 @@ services:
     container_name: db
     ports:
       - "5432:5432"
-    shm_size: 8gb
+    shm_size: ${SHM_SIZE}
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}

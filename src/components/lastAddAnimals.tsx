@@ -1,5 +1,6 @@
 import { db } from "@/lib/prisma";
 import Image from "next/image";
+import AnimalCard from "./animalCard";
 import { Separator } from "./ui/separator";
 
 const LastAddAnimals = async () => {
@@ -7,6 +8,9 @@ const LastAddAnimals = async () => {
     take: 3,
     orderBy: {
       createdAt: "desc",
+    },
+    include: {
+      especie: true,
     },
   });
 
@@ -34,10 +38,11 @@ const LastAddAnimals = async () => {
           </p>
         </div>
       )}
-
-      {data.map((animal) => (
-        <p key={animal.id}>{animal.nome}</p>
-      ))}
+      <div className="mt-5 flex w-full flex-col items-center gap-6">
+        {data.map((animal) => (
+          <AnimalCard key={animal.id} animal={animal} />
+        ))}
+      </div>
     </div>
   );
 };
