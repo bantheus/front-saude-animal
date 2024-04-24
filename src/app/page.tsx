@@ -1,3 +1,11 @@
+import AnimalSearch from "@/components/animalSearch";
+
 export default function Home() {
-  return <></>;
+  return (
+    <>
+      <main>
+        <AnimalSearch />
+      </main>
+    </>
+  );
 }

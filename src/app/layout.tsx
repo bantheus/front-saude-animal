@@ -19,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${poppins.className} subpixel-antialiased`}>
+      <body
+        className={`${poppins.className} text-stone-900 subpixel-antialiased`}
+      >
         <NextAuthProvider>
           <Header />
           {children}
