@@ -18,12 +18,12 @@ const AnimalSearch = () => {
         Buscar <span className="text-primary">animais</span>
       </h1>
 
-      <div className="mt-5 flex flex-col items-center space-y-2">
+      <div className="mt-5 flex flex-col items-center">
         <Input placeholder="Busque por espécie" />
-        <span className="font-semibold text-primary">OU</span>
+        <span className="my-1 font-semibold text-primary">OU</span>
         <Input placeholder="Busque por animal" />
 
-        <Button className="w-full text-white transition-colors duration-300 hover:bg-primary-foreground">
+        <Button className="mt-4 w-full text-white transition-colors duration-300 hover:bg-primary-foreground">
           Buscar
         </Button>
       </div>
