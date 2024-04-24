@@ -7,7 +7,7 @@ const QuickSearch = () => {
     <div className="container mx-auto p-5">
       <div className="flex items-center">
         <Separator />
-        <h2 className="whitespace-nowrap px-5 font-medium text-neutral-600">
+        <h2 className="whitespace-nowrap px-5 text-sm font-medium text-neutral-600">
           Filtros rápidos
         </h2>
         <Separator />

@@ -1,4 +1,5 @@
 import AnimalSearch from "@/components/animalSearch";
+import LastAddAnimals from "@/components/lastAddAnimals";
 import QuickSearch from "@/components/quick-search/quickSearch";
 
 export default function Home() {
@@ -10,6 +11,10 @@ export default function Home() {
 
       <section>
         <QuickSearch />
+      </section>
+
+      <section>
+        <LastAddAnimals />
       </section>
     </>
   );
