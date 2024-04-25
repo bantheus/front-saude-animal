@@ -1,10 +1,22 @@
 import CardDefault from "@/components/cards/default";
 import CardProcedimento from "@/components/cards/procedimento";
+import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/ui/date-picker";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
 import { db } from "@/lib/prisma";
 import { PillIcon, StethoscopeIcon, SyringeIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 const getAnimalDetails = async (animalId: string) => {
   const animal = await db.animal.findUnique({
@@ -81,29 +93,95 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
             <Separator className="my-10" />
 
             <div className="flex flex-col gap-4">
-              <Link
-                href={`/procedimentos/${animal.id}`}
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-violet-200 py-4 text-violet-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-violet-300"
-              >
-                <PillIcon />
-                <h2 className="font-semibold">Procedimentos</h2>
-              </Link>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-violet-200 py-4 text-violet-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-violet-300">
+                    <PillIcon />
+                    <h2 className="font-semibold">Procedimentos</h2>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Adicionar procedimento</DialogTitle>
+                    <DialogDescription>
+                      Adicione um novo procedimento aqui. Clique em salvar
+                      quando estiver pronto.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <Input placeholder="Título" />
 
-              <Link
-                href={`/vacinas/${animal.id}`}
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-rose-200 py-4 text-rose-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
-              >
-                <SyringeIcon />
-                <h2 className="font-semibold">Vacinas</h2>
-              </Link>
+                    <DatePicker />
 
-              <Link
-                href={`/consultas/${animal.id}`}
-                className="flex w-full items-center justify-center gap-3 rounded-md bg-orange-200 py-4 text-orange-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-orange-300"
-              >
-                <StethoscopeIcon />
-                <h2 className="font-semibold">Consultas</h2>
-              </Link>
+                    <Textarea placeholder="Descrição" />
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit" className="text-white">
+                      Salvar
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-rose-200 py-4 text-rose-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300">
+                    <SyringeIcon />
+                    <h2 className="font-semibold">Vacinas</h2>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Adicionar vacina</DialogTitle>
+                    <DialogDescription>
+                      Adicione uma nova vacina aqui. Clique em salvar quando
+                      estiver pronto.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <Input placeholder="Título" />
+
+                    <DatePicker />
+
+                    <Textarea placeholder="Descrição" />
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit" className="text-white">
+                      Salvar
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-orange-200 py-4 text-orange-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-orange-300">
+                    <StethoscopeIcon />
+                    <h2 className="font-semibold">Consultas</h2>
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <DialogHeader>
+                    <DialogTitle>Adicionar consulta</DialogTitle>
+                    <DialogDescription>
+                      Adicione uma nova consulta aqui. Clique em salvar quando
+                      estiver pronto.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <Input placeholder="Título" />
+
+                    <DatePicker />
+
+                    <Textarea placeholder="Descrição" />
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit" className="text-white">
+                      Salvar
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </div>
 
             <Separator className="my-10" />
