@@ -15,7 +15,7 @@ const LastAddAnimals = async () => {
   });
 
   return (
-    <div className="container mx-auto px-5">
+    <div className="container mx-auto p-5">
       <div className="flex items-center">
         <Separator />
         <h2 className="whitespace-nowrap px-5 text-sm font-medium text-neutral-600">

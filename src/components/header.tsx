@@ -3,6 +3,7 @@
 import { MenuIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
@@ -20,7 +21,7 @@ const Header = () => {
 
   return (
     <header className="container mx-auto flex h-24 items-center justify-between px-5">
-      <div className="relative h-8 w-48">
+      <Link href="/" className="relative h-8 w-48">
         <Image
           src="/logo.svg"
           alt="Logo saúde animal"
@@ -28,7 +29,7 @@ const Header = () => {
           priority
           sizes="100vw"
         />
-      </div>
+      </Link>
 
       {status === "unauthenticated" && (
         <Button
