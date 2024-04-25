@@ -1,6 +1,5 @@
 "use client";
 
-import { Animal } from "@prisma/client";
 import { PillIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
@@ -18,7 +17,7 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 
 interface AnimalProps {
-  animal: Animal;
+  animalId: string;
 }
 
 interface ProcedimentoFormProps {
@@ -27,7 +26,7 @@ interface ProcedimentoFormProps {
   data: Date;
 }
 
-const ProcedimentoForm = ({ animal }: AnimalProps) => {
+const ProcedimentoForm = ({ animalId }: AnimalProps) => {
   const {
     register,
     handleSubmit,
@@ -35,8 +34,18 @@ const ProcedimentoForm = ({ animal }: AnimalProps) => {
     control,
   } = useForm<ProcedimentoFormProps>();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: ProcedimentoFormProps) => {
+    await fetch("http://localhost:3000/api/procedimentos", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          titulo: data.titulo,
+          descricao: data.descricao,
+          data: data.data,
+          animalId,
+        }),
+      ),
+    });
   };
 
   return (

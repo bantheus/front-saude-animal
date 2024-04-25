@@ -15,11 +15,7 @@ const getAnimalDetails = async (animalId: string) => {
     },
     include: {
       especie: true,
-      consulta: {
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
+      consulta: true,
       procedimento: {
         orderBy: {
           createdAt: "desc",
@@ -83,7 +79,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
             <Separator className="my-10" />
 
             <div className="flex flex-col gap-4">
-              <ProcedimentoForm animal={animal} />
+              <ProcedimentoForm animalId={animal.id} />
 
               <VacinaForm />
 
