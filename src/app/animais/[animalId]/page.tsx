@@ -195,7 +195,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
 
                   {animal.consulta.length > 3 && (
                     <Link
-                      href={`/animais/${animal.id}/procedimentos`}
+                      href={`/animais/${animal.id}/consultas`}
                       className="w-full"
                     >
                       <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">

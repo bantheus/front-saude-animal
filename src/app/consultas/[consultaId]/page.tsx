@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/prisma";
 import Image from "next/image";
+import Link from "next/link";
 
 const getConsultaDetails = async (consultaId: string) => {
   const consulta = await db.consulta.findUnique({
@@ -82,6 +84,14 @@ const ConsultaDetail = async ({
                 </div>
               </div>
             </div>
+            <Link
+              href={`/animais/${consulta.animalId}`}
+              className="mt-5 w-full"
+            >
+              <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">
+                Voltar
+              </Button>
+            </Link>
           </div>
         </>
       )}

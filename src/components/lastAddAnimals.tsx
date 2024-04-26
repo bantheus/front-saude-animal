@@ -51,7 +51,7 @@ const LastAddAnimals = async () => {
           <AnimalCard key={animal.id} animal={animal} />
         ))}
 
-        <Link href={`/animais`} className="w-full">
+        <Link href={`/animais`} className="w-[280px]">
           <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">
             Ver todos
           </Button>
