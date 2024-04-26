@@ -5,13 +5,13 @@ import { Separator } from "@/components/ui/separator";
 import { Especie, Animal as PrismaAnimal } from "@prisma/client";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 interface Animal extends PrismaAnimal {
   especie: Especie;
 }
 
-const BuscaPage = () => {
+function Search() {
   const [animais, setAnimais] = useState<Animal[]>([]);
   const searchParams = useSearchParams();
 
@@ -59,6 +59,14 @@ const BuscaPage = () => {
         ))}
       </div>
     </div>
+  );
+}
+
+const BuscaPage = () => {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <Search />
+    </Suspense>
   );
 };
 
