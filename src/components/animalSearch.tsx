@@ -1,8 +1,27 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
+interface AnimalSearchForm {
+  animal: string;
+  especie: string;
+}
+
 const AnimalSearch = () => {
+  const { register, handleSubmit, watch } = useForm<AnimalSearchForm>();
+  const router = useRouter();
+
+  const onSubmit = (data: AnimalSearchForm) => {
+    router.push(`/animais/busca?especie=${data.especie}&animal=${data.animal}`);
+  };
+
+  const especie = watch("especie");
+  const animal = watch("animal");
+
   return (
     <div className="container relative mx-auto p-5">
       <Image
@@ -19,11 +38,15 @@ const AnimalSearch = () => {
       </h1>
 
       <div className="mt-5 flex flex-col items-center">
-        <Input placeholder="Busque por espécie" />
+        <Input placeholder="Busque por espécie" {...register("especie")} />
         <span className="my-1 font-semibold text-primary">OU</span>
-        <Input placeholder="Busque por animal" />
+        <Input placeholder="Busque por animal" {...register("animal")} />
 
-        <Button className="mt-4 w-full text-white transition-colors duration-300 hover:bg-primary-foreground">
+        <Button
+          onClick={() => handleSubmit(onSubmit)()}
+          className="mt-4 w-full text-white transition-colors duration-300 hover:bg-primary-foreground"
+          disabled={!especie && !animal}
+        >
           Buscar
         </Button>
       </div>
