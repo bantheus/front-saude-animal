@@ -1,5 +1,6 @@
 import CardDefault from "@/components/cards/default";
 import CardProcedimento from "@/components/cards/procedimento";
+import CardVacina from "@/components/cards/vacina";
 import ConsultaForm from "@/components/forms/consultaForm";
 import ProcedimentoForm from "@/components/forms/procedimentoForm";
 import VacinaForm from "@/components/forms/vacinaForm";
@@ -85,7 +86,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
             <div className="flex flex-col gap-4">
               <ProcedimentoForm animalId={animal.id} />
 
-              <VacinaForm />
+              <VacinaForm animalId={animal.id} />
 
               <ConsultaForm />
             </div>
@@ -132,7 +133,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
               ) : (
                 <ul>
                   {animal.vacina.map((vacina) => (
-                    <CardProcedimento
+                    <CardVacina
                       key={vacina.id}
                       titulo={vacina.nome}
                       icon={<SyringeIcon />}

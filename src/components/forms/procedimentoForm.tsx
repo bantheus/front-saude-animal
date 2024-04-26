@@ -111,9 +111,9 @@ const ProcedimentoForm = ({ animalId }: AnimalProps) => {
             render={({ field }) => (
               <DatePicker
                 placeholderText="Data"
-                onChange={field.onChange}
                 selected={field.value}
                 {...field}
+                value={field.value ? field.value.toLocaleDateString() : ""}
                 className={`${errors.data ? "focus-visible:ring-red-500" : "focus-visible:ring-primary"} `}
               />
             )}
