@@ -13,6 +13,7 @@ const CardProcedimento = ({
   data,
   procedimentoId,
 }: CardProps) => {
+  const dataFormatada = new Date(data).toLocaleDateString("pt-BR");
   return (
     <div className="mt-5 flex flex-col justify-end gap-4 rounded-md bg-violet-100 p-4 text-violet-900">
       <div className="flex items-center justify-center gap-2">
@@ -24,9 +25,9 @@ const CardProcedimento = ({
           href={`/procedimentos/${procedimentoId}`}
           className="rounded-md bg-violet-300 px-4 py-2"
         >
-          ver mais
+          detalhes
         </Link>
-        <p className="text-end">{data}</p>
+        <p className="text-end">{dataFormatada}</p>
       </div>
     </div>
   );

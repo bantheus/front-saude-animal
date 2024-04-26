@@ -1,6 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/prisma";
 import Image from "next/image";
+import Link from "next/link";
 
 const getVacinaDetails = async (vacinaId: string) => {
   const vacina = await db.vacina.findUnique({
@@ -74,6 +76,12 @@ const VacinaDetail = async ({ params }: { params: { vacinaId: string } }) => {
                 </div>
               </div>
             </div>
+
+            <Link href={`/animais/${vacina.animalId}`} className="mt-5 w-full">
+              <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">
+                Voltar
+              </Button>
+            </Link>
           </div>
         </>
       )}
