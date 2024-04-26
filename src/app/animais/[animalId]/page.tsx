@@ -5,10 +5,12 @@ import CardVacina from "@/components/cards/vacina";
 import ConsultaForm from "@/components/forms/consultaForm";
 import ProcedimentoForm from "@/components/forms/procedimentoForm";
 import VacinaForm from "@/components/forms/vacinaForm";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/prisma";
 import { PillIcon, StethoscopeIcon, SyringeIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const getAnimalDetails = async (animalId: string) => {
   const animal = await db.animal.findUnique({
@@ -17,29 +19,11 @@ const getAnimalDetails = async (animalId: string) => {
     },
     include: {
       especie: true,
-      consulta: {
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
-      procedimento: {
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
-      vacina: {
-        orderBy: {
-          createdAt: "desc",
-        },
-      },
+      consulta: true,
+      procedimento: true,
+      vacina: true,
     },
   });
-
-  if (animal) {
-    animal.vacina = animal.vacina.slice(0, 3);
-    animal.procedimento = animal.procedimento.slice(0, 3);
-    animal.consulta = animal.consulta.slice(0, 3);
-  }
 
   return animal;
 };
@@ -106,17 +90,30 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
               {animal.procedimento.length === 0 ? (
                 <CardDefault titulo="Nenhum procedimento encontrado" />
               ) : (
-                <ul>
-                  {animal.procedimento.map((procedimento) => (
-                    <CardProcedimento
-                      key={procedimento.id}
-                      titulo={procedimento.titulo}
-                      icon={<PillIcon />}
-                      data={procedimento.createdAt.toLocaleDateString()}
-                      href={procedimento.id}
-                    />
-                  ))}
-                </ul>
+                <div className="flex flex-col items-center justify-center gap-6">
+                  <ul className="w-full">
+                    {animal.procedimento.slice(0, 3).map((procedimento) => (
+                      <CardProcedimento
+                        key={procedimento.id}
+                        titulo={procedimento.titulo}
+                        icon={<PillIcon />}
+                        data={procedimento.createdAt.toLocaleDateString()}
+                        href={procedimento.id}
+                      />
+                    ))}
+                  </ul>
+
+                  {animal.procedimento.length > 3 && (
+                    <Link
+                      href={`/animais/${animal.id}/procedimentos`}
+                      className="w-full"
+                    >
+                      <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">
+                        Ver todos
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               )}
             </div>
 
@@ -132,17 +129,30 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
               {animal.vacina.length === 0 ? (
                 <CardDefault titulo="Nenhuma vacina encontrado" />
               ) : (
-                <ul>
-                  {animal.vacina.map((vacina) => (
-                    <CardVacina
-                      key={vacina.id}
-                      titulo={vacina.nome}
-                      icon={<SyringeIcon />}
-                      data={vacina.createdAt.toLocaleDateString()}
-                      href={vacina.id}
-                    />
-                  ))}
-                </ul>
+                <div className="flex flex-col items-center justify-center gap-6">
+                  <ul className="w-full">
+                    {animal.vacina.slice(0, 3).map((vacina) => (
+                      <CardVacina
+                        key={vacina.id}
+                        titulo={vacina.nome}
+                        icon={<SyringeIcon />}
+                        data={vacina.createdAt.toLocaleDateString()}
+                        href={vacina.id}
+                      />
+                    ))}
+                  </ul>
+
+                  {animal.vacina.length > 3 && (
+                    <Link
+                      href={`/animais/${animal.id}/procedimentos`}
+                      className="w-full"
+                    >
+                      <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">
+                        Ver todos
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               )}
             </div>
 
@@ -158,17 +168,30 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
               {animal.consulta.length === 0 ? (
                 <CardDefault titulo="Nenhuma consulta encontrado" />
               ) : (
-                <ul>
-                  {animal.consulta.map((consulta) => (
-                    <CardConsulta
-                      key={consulta.id}
-                      titulo={consulta.titulo}
-                      icon={<StethoscopeIcon />}
-                      data={consulta.createdAt.toLocaleDateString()}
-                      href={consulta.id}
-                    />
-                  ))}
-                </ul>
+                <div className="flex flex-col items-center justify-center gap-6">
+                  <ul className="w-full">
+                    {animal.consulta.slice(0, 3).map((consulta) => (
+                      <CardConsulta
+                        key={consulta.id}
+                        titulo={consulta.titulo}
+                        icon={<StethoscopeIcon />}
+                        data={consulta.createdAt.toLocaleDateString()}
+                        href={consulta.id}
+                      />
+                    ))}
+                  </ul>
+
+                  {animal.consulta.length > 3 && (
+                    <Link
+                      href={`/animais/${animal.id}/procedimentos`}
+                      className="w-full"
+                    >
+                      <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">
+                        Ver todos
+                      </Button>
+                    </Link>
+                  )}
+                </div>
               )}
             </div>
           </div>
