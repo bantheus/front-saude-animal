@@ -1,6 +1,7 @@
 "use client";
 
 import { StethoscopeIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -30,6 +31,7 @@ interface ConsultaFormProps {
 
 const ConsultaForm = ({ animalId }: AnimalProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { status } = useSession();
   const router = useRouter();
   const {
     register,
@@ -63,7 +65,16 @@ const ConsultaForm = ({ animalId }: AnimalProps) => {
     router.refresh();
   };
 
-  return (
+  return status === "unauthenticated" ? (
+    <Button
+      disabled
+      className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-orange-200 py-4 text-orange-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-orange-300"
+    >
+      <p className="text-xs font-semibold">
+        Faça login para adicionar consultas
+      </p>
+    </Button>
+  ) : (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-orange-200 py-4 text-orange-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-orange-300">
@@ -79,6 +90,7 @@ const ConsultaForm = ({ animalId }: AnimalProps) => {
             pronto.
           </DialogDescription>
         </DialogHeader>
+
         <div className="grid gap-4 py-4">
           <Input
             {...register("titulo", {

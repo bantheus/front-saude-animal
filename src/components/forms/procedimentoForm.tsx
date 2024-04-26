@@ -1,6 +1,7 @@
 "use client";
 
 import { PillIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -31,6 +32,7 @@ interface ProcedimentoFormProps {
 const ProcedimentoForm = ({ animalId }: AnimalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const { status } = useSession();
   const {
     register,
     handleSubmit,
@@ -63,7 +65,16 @@ const ProcedimentoForm = ({ animalId }: AnimalProps) => {
     router.refresh();
   };
 
-  return (
+  return status === "unauthenticated" ? (
+    <Button
+      disabled
+      className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-violet-200 py-4 text-violet-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-violet-300"
+    >
+      <p className="text-xs font-semibold">
+        Faça login para adicionar procedimentos
+      </p>
+    </Button>
+  ) : (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-violet-200 py-4 text-violet-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-violet-300">

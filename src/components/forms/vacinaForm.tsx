@@ -1,6 +1,7 @@
 "use client";
 
 import { SyringeIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -30,6 +31,7 @@ interface VacinaFormProps {
 
 const VacinaForm = ({ animalId }: AnimalProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { status } = useSession();
   const router = useRouter();
   const {
     register,
@@ -63,7 +65,14 @@ const VacinaForm = ({ animalId }: AnimalProps) => {
     router.refresh();
   };
 
-  return (
+  return status === "unauthenticated" ? (
+    <Button
+      disabled
+      className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-rose-200 py-4 text-rose-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300"
+    >
+      <p className="text-xs font-semibold">Faça login para adicionar vacinas</p>
+    </Button>
+  ) : (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-rose-200 py-4 text-rose-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-rose-300">

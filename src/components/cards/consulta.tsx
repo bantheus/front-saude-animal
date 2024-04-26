@@ -4,10 +4,10 @@ interface CardProps {
   titulo: string;
   icon: React.ReactNode;
   data: string;
-  href: string;
+  consultaId: string;
 }
 
-const CardConsulta = ({ titulo, icon, data, href }: CardProps) => {
+const CardConsulta = ({ titulo, icon, data, consultaId }: CardProps) => {
   return (
     <div className="mt-5 flex flex-col justify-end gap-4 rounded-md bg-orange-100 p-4 text-orange-900">
       <div className="flex items-center justify-center gap-2">
@@ -16,7 +16,7 @@ const CardConsulta = ({ titulo, icon, data, href }: CardProps) => {
       </div>
       <div className="flex items-center justify-between text-sm">
         <Link
-          href={`/procedimentos/${href}`}
+          href={`/consultas/${consultaId}`}
           className="rounded-md bg-orange-300 px-4 py-2"
         >
           ver mais

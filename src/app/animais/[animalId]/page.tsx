@@ -137,7 +137,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
                         titulo={vacina.nome}
                         icon={<SyringeIcon />}
                         data={vacina.createdAt.toLocaleDateString()}
-                        href={vacina.id}
+                        vacinaId={vacina.id}
                       />
                     ))}
                   </ul>
@@ -176,7 +176,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
                         titulo={consulta.titulo}
                         icon={<StethoscopeIcon />}
                         data={consulta.createdAt.toLocaleDateString()}
-                        href={consulta.id}
+                        consultaId={consulta.id}
                       />
                     ))}
                   </ul>
