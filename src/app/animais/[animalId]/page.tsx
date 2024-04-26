@@ -60,7 +60,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
             <h1 className="text-xl font-semibold text-primary-foreground">
               {animal.nome}
             </h1>
-            <div className="flex justify-between gap-2 text-sm">
+            <div className="flex justify-between gap-2 text-xs">
               <p>Espécie - {animal.especie.nome}</p>
               <p>Sexo - {animal.sexo.substring(0, 1)}</p>
               <p>Peso - {animal.peso} Kg</p>

@@ -1,16 +1,10 @@
+import AnimalCard from "@/components/animalCard";
+import { Separator } from "@/components/ui/separator";
 import { db } from "@/lib/prisma";
 import Image from "next/image";
-import Link from "next/link";
-import AnimalCard from "./animalCard";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
 
-const handleLastAddAnimals = async () => {
+const handleAnimals = async () => {
   const data = await db.animal.findMany({
-    take: 3,
-    orderBy: {
-      createdAt: "desc",
-    },
     include: {
       especie: true,
     },
@@ -19,16 +13,16 @@ const handleLastAddAnimals = async () => {
   return data;
 };
 
-const LastAddAnimals = async () => {
-  const data = await handleLastAddAnimals();
+const AnimalsPage = async () => {
+  const data = await handleAnimals();
 
   return (
     <div className="container mx-auto p-5">
       <div className="flex items-center">
         <Separator />
-        <h2 className="whitespace-nowrap px-5 text-sm font-medium text-neutral-600">
-          Adicionados recentemente
-        </h2>
+        <h1 className="whitespace-nowrap px-5 text-sm font-medium text-neutral-600">
+          Todos os animais
+        </h1>
         <Separator />
       </div>
 
@@ -50,15 +44,9 @@ const LastAddAnimals = async () => {
         {data.map((animal) => (
           <AnimalCard key={animal.id} animal={animal} />
         ))}
-
-        <Link href={`/animais`} className="w-full">
-          <Button className="w-full text-white transition-colors duration-300 first:bg-primary hover:bg-primary-foreground">
-            Ver todos
-          </Button>
-        </Link>
       </div>
     </div>
   );
 };
 
-export default LastAddAnimals;
+export default AnimalsPage;
