@@ -52,6 +52,9 @@ model Consulta {
   animal   Animal @relation(fields: [animalId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   animalId String
 
+  user   User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -68,6 +71,10 @@ model Vacina {
 
   animal   Animal @relation(fields: [animalId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   animalId String
+
+  user   User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String
+  
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -86,6 +93,9 @@ model Procedimento {
   animal   Animal @relation(fields: [animalId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   animalId String
 
+  user   User @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -103,6 +113,10 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+
+  procedimento Procedimento[]
+  vacina       Vacina[]
+  consulta     Consulta[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

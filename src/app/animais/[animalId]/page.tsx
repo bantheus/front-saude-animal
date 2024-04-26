@@ -98,7 +98,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
                         titulo={procedimento.titulo}
                         icon={<PillIcon />}
                         data={procedimento.createdAt.toLocaleDateString()}
-                        href={procedimento.id}
+                        procedimentoId={procedimento.id}
                       />
                     ))}
                   </ul>
