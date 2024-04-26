@@ -1,3 +1,4 @@
+import CardConsulta from "@/components/cards/consulta";
 import CardDefault from "@/components/cards/default";
 import CardProcedimento from "@/components/cards/procedimento";
 import CardVacina from "@/components/cards/vacina";
@@ -88,7 +89,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
 
               <VacinaForm animalId={animal.id} />
 
-              <ConsultaForm />
+              <ConsultaForm animalId={animal.id} />
             </div>
 
             <Separator className="my-10" />
@@ -159,7 +160,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
               ) : (
                 <ul>
                   {animal.consulta.map((consulta) => (
-                    <CardProcedimento
+                    <CardConsulta
                       key={consulta.id}
                       titulo={consulta.titulo}
                       icon={<StethoscopeIcon />}
