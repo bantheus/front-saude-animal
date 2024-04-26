@@ -1,6 +1,8 @@
 "use client";
 
 import { PillIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import DatePicker from "../ui/date-picker";
@@ -27,11 +29,15 @@ interface ProcedimentoFormProps {
 }
 
 const ProcedimentoForm = ({ animalId }: AnimalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
+    reset,
   } = useForm<ProcedimentoFormProps>();
 
   const onSubmit = async (data: ProcedimentoFormProps) => {
@@ -46,10 +52,19 @@ const ProcedimentoForm = ({ animalId }: AnimalProps) => {
         }),
       ),
     });
+
+    setValue("titulo", "");
+    setValue("descricao", "");
+    reset();
+
+    setIsOpen(false);
+
+    await router.push(`/animais/${animalId}`);
+    router.refresh();
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button className="flex h-[56px] w-full items-center justify-center gap-3 rounded-md bg-violet-200 py-4 text-violet-900 shadow-md transition-colors duration-300 ease-in-out hover:bg-violet-300">
           <PillIcon />

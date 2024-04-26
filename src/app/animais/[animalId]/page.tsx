@@ -15,7 +15,11 @@ const getAnimalDetails = async (animalId: string) => {
     },
     include: {
       especie: true,
-      consulta: true,
+      consulta: {
+        orderBy: {
+          createdAt: "desc",
+        },
+      },
       procedimento: {
         orderBy: {
           createdAt: "desc",
@@ -123,7 +127,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
                 <Separator />
               </div>
 
-              {animal.procedimento.length === 0 ? (
+              {animal.vacina.length === 0 ? (
                 <CardDefault titulo="Nenhuma vacina encontrado" />
               ) : (
                 <ul>
@@ -149,7 +153,7 @@ const AnimalDetails = async ({ params }: { params: { animalId: string } }) => {
                 <Separator />
               </div>
 
-              {animal.procedimento.length === 0 ? (
+              {animal.consulta.length === 0 ? (
                 <CardDefault titulo="Nenhuma consulta encontrado" />
               ) : (
                 <ul>
