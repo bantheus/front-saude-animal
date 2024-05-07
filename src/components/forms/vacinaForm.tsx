@@ -43,7 +43,7 @@ const VacinaForm = ({ animalId }: AnimalProps) => {
   } = useForm<VacinaFormProps>();
 
   const onSubmit = async (data: VacinaFormProps) => {
-    await fetch("http://localhost:3000/api/vacinas", {
+    await fetch("https://front-saude-animal.vercel.app/api/vacinas", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({

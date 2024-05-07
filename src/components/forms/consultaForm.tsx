@@ -43,7 +43,7 @@ const ConsultaForm = ({ animalId }: AnimalProps) => {
   } = useForm<ConsultaFormProps>();
 
   const onSubmit = async (data: ConsultaFormProps) => {
-    await fetch("http://localhost:3000/api/consultas", {
+    await fetch("https://front-saude-animal.vercel.app/api/consultas", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({

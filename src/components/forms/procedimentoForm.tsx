@@ -43,7 +43,7 @@ const ProcedimentoForm = ({ animalId }: AnimalProps) => {
   } = useForm<ProcedimentoFormProps>();
 
   const onSubmit = async (data: ProcedimentoFormProps) => {
-    await fetch("http://localhost:3000/api/procedimentos", {
+    await fetch("https://front-saude-animal.vercel.app/api/procedimentos", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({
